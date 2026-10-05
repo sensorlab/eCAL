@@ -45,6 +45,13 @@
     },
     {
       "@type": "ScholarlyArticle",
+      "headline": "Where Should Agents Live? Energy-Memory Characterization of Agentic AI for the Edge-Cloud Continuum",
+      "sameAs": "https://arxiv.org/abs/2609.18283",
+      "identifier": "arXiv:2609.18283",
+      "author": { "@id": "https://sensorlab.github.io/eCAL/#org" }
+    },
+    {
+      "@type": "ScholarlyArticle",
       "headline": "Energy Cost of the AI/ML Workflow in O-RAN",
       "sameAs": "https://doi.org/10.1109/NFV-SDN66355.2025.11349371",
       "identifier": "doi:10.1109/NFV-SDN66355.2025.11349371",
@@ -205,6 +212,7 @@
     background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M20 6L9 17l-5-5' fill='none' stroke='%230f9d6f' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");background-size:11px;background-repeat:no-repeat;background-position:center}
   .paper .by{margin-top:auto;padding-top:20px;font-size:13px;color:var(--muted)}
   .paper .venuerow{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+  .paper .tag{display:inline-flex;align-items:center;font-size:12px;font-weight:700;letter-spacing:.4px;text-transform:uppercase;color:var(--brand);border:1px solid var(--brand);padding:4px 10px;border-radius:7px}
   .paper .spot{display:inline-flex;align-items:center;gap:5px;font-size:12px;font-weight:700;letter-spacing:.4px;text-transform:uppercase;color:#fff;background:linear-gradient(135deg,var(--brand),var(--brand-2));padding:5px 11px;border-radius:7px}
   @media(max-width:820px){.papers{grid-template-columns:1fr}.paper.flagship{grid-column:auto}}
 
@@ -258,6 +266,7 @@
         <a href="#build">What We Build</a>
         <a href="#law">The Metric</a>
         <a href="#research">Research</a>
+        <a href="agentic.html">agentic-eCAL</a>
         <a class="btn" href="#try">Get eCAL</a>
       </div>
     </nav>
@@ -409,8 +418,21 @@
         </ul>
         <div class="by">Vol. 44, pp. 2427–2443 · Published 11 Dec 2025 · Chou, Hribar, Hanžel, Mohorčič, Fortuna — SensorLab, Jožef Stefan Institute</div>
       </a>
+      <a class="paper flagship" href="agentic.html">
+        <div class="venuerow"><span class="venue">arXiv · 2026 · Preprint</span><span class="spot">★ New · agentic-eCAL</span></div>
+        <h3>Where Should Agents Live? Energy-Memory Characterization of Agentic AI for the Edge-Cloud Continuum</h3>
+        <p>Extends eCAL to multi-agent LLM workflows. agentic-eCAL counts every LLM call, tool, retrieval,
+        inter-agent hand-off, and the amortized pre-training energy, and uses them to study where across the
+        edge-cloud continuum agent teams should run.</p>
+        <ul>
+          <li>Inter-agent text transport accounts for &lt;0.25% of workflow energy; context processing dominates</li>
+          <li>Two-rate LLM call model (prefill vs. decode) validated on A100 with R² &gt; 0.99</li>
+          <li>Multi-agent topologies use up to 23.9× more energy without consistently solving more tasks</li>
+        </ul>
+        <div class="by">arXiv:2609.18283 · Fortuna, Hanžel, Strnad, Bertalanič · Explore agentic-eCAL →</div>
+      </a>
       <a class="paper" href="https://doi.org/10.1109/NFV-SDN66355.2025.11349371" target="_blank" rel="noopener">
-        <span class="venue">2025 IEEE NFV-SDN</span>
+        <div class="venuerow"><span class="venue">2025 IEEE NFV-SDN</span><span class="tag">O-RAN application</span></div>
         <h3>Energy Cost of the AI/ML Workflow in O-RAN</h3>
         <p>Applies the eCAL lifecycle methodology to O-RAN AI/ML workflows, quantifying the energy footprint of
         adding machine learning to next-generation radio access networks.</p>
@@ -422,14 +444,14 @@
         <div class="by">pp. 1–6 · Chou, Hribar, Bertalanič, Mohorčič, Lagkas, Sarigiannidis, Fortuna</div>
       </a>
       <a class="paper" href="https://doi.org/10.1109/CSCN63874.2024.10849732" target="_blank" rel="noopener">
-        <span class="venue">2024 IEEE CSCN</span>
+        <div class="venuerow"><span class="venue">2024 IEEE CSCN</span><span class="tag">6G application</span></div>
         <h3>Towards the Standardization of Energy Efficiency Metrics of the AI Lifecycle in 6G and Beyond</h3>
-        <p>The earliest work in this research line, arguing for standardized, lifecycle-aware energy-efficiency
-        metrics as AI becomes native to 6G and future communication networks.</p>
+        <p>Brings eCAL to AI-native 6G, arguing that network-only 3GPP energy-efficiency KPIs miss the cost of
+        AI computation and making the case for eCAL as a standard metric, demonstrated on an O-RAN system.</p>
         <ul>
-          <li>Motivates the need for standardized AI-lifecycle energy metrics</li>
-          <li>Frames energy efficiency as a first-class 6G design requirement</li>
-          <li>Lays the conceptual groundwork later formalized as eCAL</li>
+          <li>Shows why existing 3GPP energy KPIs miss the computational cost of AI</li>
+          <li>Captures the QoE–energy trade-off: a 95% accuracy target costs nearly twice the energy per bit of a 90% one</li>
+          <li>Adds a region-aware carbon footprint across Germany, Slovenia, and Finland</li>
         </ul>
         <div class="by">pp. 187–190 · Chou, Hribar, Mohorčič, Fortuna</div>
       </a>
@@ -449,7 +471,15 @@
       <div class="codebox">
         <div class="lbl">Install &amp; CLI</div>
         <pre><span class="p">$</span> pip install ecal-energy
-<span class="p">$</span> ecal estimate <span class="k">--model</span> MLP <span class="k">--layers</span> 3 <span class="k">--epochs</span> 50 <span class="k">--hardware</span> apple_m2</pre>
+<span class="p">$</span> ecal estimate <span class="k">--model</span> MLP <span class="k">--layers</span> 3 \
+    <span class="k">--epochs</span> 50 <span class="k">--hardware</span> apple_m2
+
+<span class="p">  transmission        :     0.411330 J (  9.09%)
+  training            :     0.001613 J (  0.04%)
+  inference_process   :     4.113338 J ( 90.88%)
+  total               :     4.526285 J (100.00%)
+  …
+  eCAL:</span> <span class="k">6.4293823764e-07 J/bit</span></pre>
       </div>
       <div class="codebox">
         <div class="lbl">Python API</div>
@@ -461,7 +491,8 @@ result = ecal.estimate(
     num_samples=1000, num_epochs=50,
     hardware=<span class="p">"apple_m2"</span>,
 )
-<span class="k">print</span>(result[<span class="p">"ecal_j_per_bit"</span>])</pre>
+<span class="k">print</span>(result[<span class="p">"ecal_j_per_bit"</span>])
+<span class="p"># 6.429382376358902e-07</span></pre>
       </div>
     </div>
     <div class="refline">
